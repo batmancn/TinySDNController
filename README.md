@@ -3,19 +3,14 @@ TinySDNController
 
 TinySDNController(use TSC for short) is an light event-driven SDN SAL(South Abstract Layer) controller. Most SDN controller contains three layer, communicated by RPC or REST-API, thay are north abstract layer, middleware and sourth abstract layer. TSC need route platform to supply route or path, we insert TSC into xorp.ct, so we use json-rpc to communicate. As TSC need to accept package from OVS, so we use event driven mechanism.
 
-#### Why need WebOVS?  
-By now, there are several ways to operate Openvswitch as bellow. SDN controllers use these way to control Openvswitch as netwrok infrustructure.
-<ul>
-  <li>CLI using ovs-XXX tools.</li>
-  <li>Use JSON-RPC to operate OVSDB.</li>
-  <li>Use Openflow message to operate Vswitchd directly, which is used to operate flows.</li>
-</ul>
+#### Why need TSC?
+TSC could expand traditional route platform by adding SDN controller. There are basicly tow function modules. One is TSC who process openflow message and json-rpc message from OVSs. The other is route-manager and switch-manager, who is response for translate route from traditional platform into path and then translate path into flows.
 
-REST API is a good way to process CRUD operation, which is used in controllers as web based access method. But in most case as bellow, we only want to operate Openvswitch directly.
+In stage one, we codes module one.
 <ul>
-  <li>Openvswitch is porting on embedded platform, whose resource is limited.</li>
-  <li>We only need Openvswitch and don't want to be complex in deployment.</li>
-  <li>We want web interface to operate and show elements of Openvswitch visually.</li>
+  <li>We use ACE as event-driven frame work.</li>
+  <li>We use json-cpp as communicate method.</li>
+  <li>We use openvswitch library to implement SAL fanction.</li>
 </ul>
 
 #### What's the architecture?
