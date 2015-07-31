@@ -1,0 +1,9 @@
+NOT in word set set
+NOT in word set _is_a
+NOT in word set destroy
+NOT in word set get
+NOT in word set _get_width
+NOT in word set _set_width
+NOT in word set _get_height
+NOT in word set _set_height
+NOT in word set _non_existent
