@@ -5,10 +5,13 @@
 #       This is a temprary makefile for TSC project. You could run by 'make controller'.
 #----------------------------------------------------------------------------
 
-all : client
+all : client.o
 
-client : client.o
-	g++ -o ./controller/client/client.o ./controller/client/JsonClient.cpp ./controller/client/Sender.h
+client.o : json.o ./controller/client/Sender.h
+	g++ ./controller/client/JsonClient.cpp
+
+json.o : ./jsoncpp/dist/jsoncpp.cpp ./jsoncpp/dist/json/json.h ./jsoncpp/dist/json/json-forwards.h
+	g++ ./jsoncpp/dist/jsoncpp.cpp
 
 clean :
 	rm ./controller/client/client.o
