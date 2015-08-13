@@ -1,0 +1,10 @@
+How to use ctags?
+=================
+
+ctags -R ./controller (or the folder you want, like ./ACE_Wrapper/ace)
+
+
+How to use cscope?
+==================
+
+cscope -Rbq -s ./folderYouWant
