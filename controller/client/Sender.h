@@ -1,6 +1,6 @@
-class Sender : public ACE_Handler
+class Sender : public
 {
 public:
-
+    bool Send();
 private:
 };

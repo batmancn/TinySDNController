@@ -1,0 +1,30 @@
+# -*- makefile -*-
+#----------------------------------------------------------------------------
+#   @author : batmancn
+#   @description :
+#       This is a temprary makefile for TSC project. You could run by 'make controller'.
+#----------------------------------------------------------------------------
+
+INCLUDE_PATH = -I./jsoncpp/dist/json -I./controller/client -I./ACE_wrappers
+TARGET= client.o
+SOURCEFILE = ./controller/client/OptException.cpp ./controller/client/OptParserImpl.cpp ./controller/client/JsonClient.cpp ./jsoncpp/dist/jsoncpp.cpp
+ACE_STATIC_LIB = ./ACE_wrappers/lib/libACE.a
+
+all : client.o
+
+client.o : ./controller/client/JsonClient.cpp ./jsoncpp/dist/json/json.h ./jsoncpp/dist/json/json-forwards.h json.o optException.o optParser.o 
+	g++ -o client.o $(INCLUDE_PATH) ./controller/client/JsonClient.cpp json.o optException.o optParser.o
+
+json.o : ./jsoncpp/dist/jsoncpp.cpp ./jsoncpp/dist/json/json.h ./jsoncpp/dist/json/json-forwards.h
+	g++ -o json.o $(INCLUDE_PATH) ./jsoncpp/dist/jsoncpp.cpp
+
+optException.o : ./controller/client/OptException.cpp ./controller/client/client.h
+	g++ -o optException.o $(INCLUDE_PATH) ./controller/client/OptException.cpp
+
+optParser.o : ./controller/client/OptParserImpl.cpp ./controller/client/OptParserImpl.h ./controller/client/client.h ./ACE_wrapper/ace/Get_Opt.h
+	g++ -o optParser.o $(INCLUDE_PATH) ./controller/client/OptParserImpl.cpp $(ACE_STATIC_LIB)
+
+clean :
+	rm ./controller/client/client.o
+	rm ./controller/client/optException.o
+	rm ./controller/client/optParser.o
